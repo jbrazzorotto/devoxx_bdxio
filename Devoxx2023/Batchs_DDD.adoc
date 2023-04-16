@@ -1,0 +1,78 @@
+= Batchs DDD Domain Driven Dev
+:imagesdir: ./images
+:toc:
+
+== Abstract
+
+
+
+
+== Notes
+
+batch process <> approche modélisée (domain model)
+
+* merger les domains process
+isoler le domain model
+
+* rajouter des adapters
+ex: services REST, BUs listener, ligne de commande ou batch
+
+* utiser un repository
+
+* interactif service + cache
+:image: 
+interet du cache : cohérence des données
+donc utiliser des décorateurs
+
+=== perf
+
+image::batch (1).jpg[]
+
+exemple avec spring batch
+meilleure portabilité
+
+moduler les batchs (style micro service)
+
+
+préférer l'approche incrémentale (pour ne pas tout relancer à chaque fois)
+
+monoids (elements neutres composés)
+
+ex: calculs sur des régions
+
+tout peut être composable
+
+=== Lambda Architecture
+
+batch rapides
++ batchs moins longs qui reprennent le traitement et le corrigent
+tout en restant incrémental
+
+==== Cas d'erreurs
+
+garder la composition d'erreurs
+car la sommes d'erreurs revient à un cas OK
+
+autoriser les traitements parallèles (map-reduce architecture)
+
+=== domain-chunking
+
+chunk sur semaines 
+reports interprétables
+
+chunks sur éléments domain-driven (éléments interprétables, exemples régions françaises)
+
+Aggrégats
+réduire les invariants à plus petit
+
+=== real_time
+
+transformer l'output du batch en un evenement qui part dans un bus
+le message représente un aggrégat
+
+image::batch (2).jpg[]
+
+micro_batching + service
+
+comment s'assurer de la cohérence de tous ces micro-services
+utiliser des batchs séquentiels

@@ -1,0 +1,66 @@
+= De Java à SCALA
+:imagesdir: images
+:toc:
+
+== Abstract
+
+image::scala1.jpg[]
+
+== Notes
+
+* https://github.com/SimplyScal/fpscala3_uno
+* https://discord.com/invite/scala
+* https://discord.com/invite/2ccFBr4 (ZIO)
+
+=== Prez Scala
+
+scala 2.10, 2.13
+Actuellement Scala 3
+
+programmation fonctionnelle
+syntaxe à la python
+
+----
+case class State(n:Int, value:Int):
+def inc: State =
+  if n == value then this
+  else this.copy(n = n+1)
+----
+
+Scala est compilé en bytecode Java
+
+Java17 : pattern matching, sealed classes, records
+
+on peut compiler à la fois du java et du scala
+
+Scala meilleur en programmation concurrente
+
+Scala ne marche pas avec SprintBoot
+
+Rust très demandé en remplacement du C++
+
+image::scala2.jpg[]
+
+=== Programmation Fonctionnelle
+
+par fonctions/dérivé des mathématiques :
+- abstractions/généralisation
+- composition/décomposition
+- algèbres/logique
+
+languages déclaratifs : SQL, CSS
+
+programmation impérative
+x:= x+1
+programmation logique
+hommes(socrates);
+x=> humain(x) si homme(x);
+humain(socrates) ?
+
+modélisations et interactions / Transformations et règles
+
+les fonctions sont pures et n'ont pas d'effet de bord
+
+Utilisation des pattern matchings comme pour Java 20-21
+
+image::scala3.jpg[]

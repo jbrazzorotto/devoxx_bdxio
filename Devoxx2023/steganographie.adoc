@@ -1,0 +1,43 @@
+= Steganographie
+:imagesdir: ./images s
+:toc:
+
+== Abstract
+
+cacher des messages dans les images
+
+== Notes
+
+chaine de caracteres flag[a-z)
+pngcheck -c ../image.png
+
+pngcheck -cv image.png | grep IEND
+
+liste des chunk dans les images
+
+xsd -s <octet> -l 
+
+OpenStego
+
+LSB lESS Significant Bit
+
+pixel : RGB
+
+TEXTE "SECRET" chaque lettre sur des bits regroupés par 3 (comme RGB)
+
+Récupère texte encodé en base64
+3*8 = 4 *6
+
+
+
+=== notion de padding
+
+les derniers octets sont complété par des 0
+on rajoute 2 =
+récup le padding et le décoder
+
+=== Utilisation
+
+communication secrete sur des boards
+exfiltration de données
+publicité malveillante

@@ -1,0 +1,176 @@
+= Devoxx 2023 (du  12 au 14 avril)
+:imagesdir: ./images
+:toc:
+
+
+== Mercredi
+
+=== Value types et Pattern Matching : 1 partout, données au centre
+link:values_types_pattern_matching.adoc[]
+
+=== De Java à Scala 3, des lambdas à la programmation fonctionnelle : un code plus lisible, plus explicite, avec moins d'erreurs
+
+link:scala.adoc[]
+
+=== Des secrets dans les pixels ! A la découverte de la stéganographie
+
+link:steganographie.adoc[]
+
+=== Les secrets internes de Spring
+
+image::spring_beans.jpg[]
+
+== Jeudi
+
+=== Keynote
+
+image::keynote.jpg[]
+
+=== Introduction à Rust embarqué
+
+Rustup.rs
+Bibliothèque Rust plus légère que le code C
+
+https://www.avr-rust.com/
+https://github.com/Rahix/avr-hal
+https://github.com/swallez/intro-embdedded-rust/
+
+
+=== Bien choisir sa base de données
+
+image::bd_1.jpg[]
+image::bd2.jpg[]
+
+=== Single Sign On en 15 min sans modifier son code
+
+image::sso_1.jpg[]
+image::sso_2.jpg[]
+
+https://github.com/fb64/easy-sso
+
+=== De chroot à Docker, Podman, et maintenant les modules Wasm, 40 d'évolution de la conteneurisation
+
+Repo du talk : https://github.com/Ardemius/history-of-containerization
+
+Chronologie avec toutes les dates : https://github.com/Ardemius/history-of-containerization/blob/main/chronology-all-dates.adoc
+
+Document de travail (très long) : https://github.com/Ardemius/history-of-containerization/blob/main/history-of-containerization-notes.adoc
+
+=== Les nouveautés de Java 19 et 20
+link:java19_20.adoc[]
+
+=== Ah, tu peux faire ça en CSS maintenant ?
+
+==== Abstract
+
+Raphael Goetter (alsacréations)
+
+@goetter
+
+==== Résumé
+
+https://speakerdeck.com/goetter (slides)
+
+
+Position :sticky
+
+Media query pour connaître le navigateur
+@media screen 
+@media (width >= 768px)
+
+Vidéo responsive
+Aspect-ratio: 16/9
+
+Titre derrière éléments
+Backdrop-filter: blur brightness
+
+Scroll-behavior
+
+Clamp : pour adapter le CSS a la fenêtre
+
+@supports ou @supports not
+
+Grid-template-columns
+
+
+image::css_1.jpg[]
+
+@layer permet de redéfinir l'ordre et la priorité dans le sélecteur
+
+Display : flex ne se met que sur un niveau
+Display: content fait disparaitre un niveau
+
+Has() pour cibler le parent
+
+
+
+=== Fun(ctionnal) Domain Driven Design (featuring Ukulele)
+
+image::ukulele.jpg[]
+
+=== Les post-mortems ou comment sortir heureux d'un carnage
+
+=== Accélérez vos livraison d'API avec Microcks
+
+Contract / exemple
+
+== Vendredi
+
+=== Keynote
+
+=== Conversations avec ChatGPT : Illusions ou Réalité ?
+
+=== Miroir, miroir, dis-moi si je suis Observable ?
+
+image::observable1.jpg[]
+
+Dashboard
+Ajout de logs
+Alerring par mail - >faux positifs
+
+Mauvaise idée
+
+Méthode FMEA
+Failure logs and effects analysis
+
+image::observable2.jpg[]
+
+Grafana Loki Yaeger
+
+=== 6 Tips pour améliorer sa Web App Angular
+
+image::angular1.jpg[]
+
+image::angular2.jpg[]
+
+Expérience utilisateur : resolver + loader
+
+image::angular3.jpg[]
+
+=== Les Tests de Charge sans être à côté de la plaque
+
+image::tests (1).jpg[]
+image::tests (2).jpg[]
+image::tests (3).jpg[]
+image::tests (4).jpg[]
+
+=== Profitez de PostGreSQL pour passer à la vitesse supérieure
+
+image::postgre.jpg[]
+
+Génération de données à la volée
+Partition des données, de tables
+Ajout de rôles aux tables
+Cron
+Écrire fonction dans d'autres languages
+Import de données (data wrapper)
+Json, attention à la performance (json_path_query)
+
+=== Ré-architecturez vos traitements batch avec Domain-Driven Design
+link:Batchs_DDD.adoc[]
+
+
+=== Tour d'horizon de la gestion de la concurrence dans différents languages
+
+image::thread.jpg[]
+

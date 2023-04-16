@@ -1,0 +1,172 @@
+= JAVA 19-20
+:imagesdir: images
+:toc:
+
+== Abstract
+
+jm Doudoux
+
+== Notes
+
+19 : 20-09-22
+20 : 21-03-23
+
+records pattern, virtual threads,
+
+amber-panama-loom
+
+
+
+=== amber
+
+pattern matching: déconstructon du record
+
+==== record pattern
+
+permet d'accéder aux valeurs du record via getter
+
+type pattern et record pattern dans le switch
+
+java 20 : utilisable ds une boucle for
+
+----
+for (empl(var nom, var prenom) : employees)
+----
+
+utiliser inférence de type
+
+imbriquer les record patterne
+
+image::java19_1.jpg[]
+
+
+utiliser sur un record generique ex Mono
+20 : inférence des record generiques
+
+==== pattern matching
+
+utiliser dans switch
+
+switch(object)
+vase employer t ->
+case terrain r ->
+
+gestion du null sur le switch
+
+java 20 : exception levée au runtime MatchException
+
+
+=== panama
+
+==== foreing function & memory API
+
+APi de bas niveau pour acces donnes memoire de maniere sure et perfo et invoquer fct natives
+
+incubation : package java.incubator
+preview : dans java.base
+
+attention API evolue bcp
+
+image::java19_2.jpg[]
+
+==== Vector API
+
+permet le calcul vectoriel
+uniquement sur CPU multi coeur
+traiter en parallèle des tab de données
+API de bas niveau et verbose, dépendante du CPU 
+
+=== loom
+
+==== Virtual threads
+
+chak thread est mappé à un thread de l'os
+pas optimal
+limite les threads
+on en utilise de + en +
+
+les threads virtuels en preview
+léger car gérés par la JDK
+Lien n-n
+si op bloquante, opération  en asynchrone ce qui libere le thread
+
+conserver 1 thread par requete
+hérite de java.lang.Thread
+permet le débogage
+
+pas de blocage des theads de l'os
+thread porteur peut exécuter un autre thread virtuel
+
+mécanisme transparent pour le dev
+
+----
+Thread.startVirtualThread
+Thread.Builder.ofVirtuals
+----
+
+ne pas mettre les threads virtuels dans un pool; ils sont des threads démons
+pas d'utilisation de stop(), resume(), suspend()
+
+améliore les perfs lorsque nb de taches simultanes est important et n'utilisent pas trop la CPU
+
+Si code synchronized, préferable d'utiliser un Reentrant.lock
+
+éviter d'utiliser du code natif avec virtual threads
+
+==== Structured Concurency
+
+simplifie la prog multithread
+exécuté dans des threads virtuels
+
+Fork/Join et concurrence structurée sont complementaires
+
+image::java19_3.jpg[]
+
+écriture du code en synchrone
+code facile à lire et à tester
+
+StructuredTaskScope
+  .shutdownOnFailure : execute toutes les sous-taches et peut lever une exception
+ .shutdowOnSuccesss : renvoie le result de la 1 tache finie
+
+on peut hériter de StructuredTakScope
+
+==== scopes values
+
+partage des objets dans le code exécuté par un thread
+on utilise historiquemenet Thread.local mais fuite de mémoire
+
+API ScopedValue peut stocker et partager données immutables
+where() pour faire assoc avec 1 valeur
+
+puis run() ou call()
+
+get() pour obtenir valeur ou lever exception
+
+peut réassocier une valeur dans un traitement sous jascent
+
+image::java19_4.jpg[]
+
+=== autres
+
+* modifications de méthodes dans ThreadGroup
+
+* Double.toString et Float.toString est devenue + stricte
+
+* Format des dates dans la Locale
+
+----
+DateTimeFormatter.ofLocalDateTime
+----
+
+* nouvelles méthodes pour créer HashMap et HashSet : définir la taille de la liste préalouée
+-> dans le constructeur
+
+* Java20 ne compile plus de Java7
+
+* Java19 permet d'accéder au keystore de windows
+
+== Conclusion
+
+perf et sécurité
+java21 sera LTS en septembre 2023

@@ -1,0 +1,227 @@
+= Values Types et pattern Matching
+:imagesdir: images
+:toc:
+
+== Abstract
+
+José Paumard, Rémi Forax
+
+== Notes
+- http://dev.java/
+- https://dev.java/community
+- https://jdk.java.net/  => java 21
+
+
+=== vidéos
+- videos inside java newcast
+- inside java podcast
+- cracking the java coding interview
+- inside.java
+- sip of java
+- JEP Café
+
+
+== Data oriented programming / Amber
+
+programmation orientée objet OOP
+les api st + importantes que le code
+
+DOP data oriented programming -> les données st + importantes que le code
+Si les donnes changent le compilateur aide
+
+init données
+
+----
+Objetcs.requiredNonNull(name)
+List.copyOf(citys)
+----
+
+séparer données et code
+
+=== pattern matching
+
+----
+if (names instanceof City city) {
+    return city.name();
+ }
+non-sealed class City implements Named
+
+public sealed interface Named permits City, Department
+----
+
+(hiérarchie cellée)
+
+le switch est devenu une expression : (le nouveau switch renvoie une valeur)
+
+----
+return switch (named) {
+    case City city -> city.name();
+    case Department depart -> depart.name();
+    default -> "";  ou case Region -> "";
+}
+
+public record City(String name, int popuplation) implements Named {
+
+    public City {
+Objetcs.requiredNonNull(name)
+if (population < 0) {
+    thow new illegallargumentexception("nope")
+----
+
+record sérialisables par défaut (jackson)
+un record est final
+il ne peut pas extends un autre objet
+il étends Record et non pas Object
+on ne peut pas rajouter d'attributs dans un Record
+mais possible pour un champ statique
+
+
+----
+return switch (named) {
+    case City(String name, int population) -> name;
+    case Department(string nameDep, City[] cities) -> nameDept;
+    case Region -> "";
+}
+
+public record Department(String name, City[] cities) implements Named {
+
+    public Department(String name, City[] cities) {
+        this.name = name;
+        this.cities = cities.clone()
+
+
+return switch (named) {
+    case City(String name, __) -> name;
+    case Department(string nameDep, __) -> nameDept;
+    case Region -> "";
+}
+
+----
+
+pour le dernier cas, __ indique que l'on ne veut pas utiliser la donnée
+(présent dans les prochains validateur)
+
+----
+return switch (named) {
+    case null -> "ha ha";
+    case City(var name, var population) -> name;
+    case City(var name, var population) 
+        when name.equals("paris") -> "paris";
+    case Department(var nameDep, var cities) -> nameDept;
+    case Region -> "";
+}
+----
+
+if you are not the owner of the code
+
+|===
+| polymorphisme | pattern matching 
+| add new subtypes   |    add new operations 
+| no new operations   |   no new subtypes 
+|===
+
+types cellés -> moins de tests
+
+
+en prévision pour matcher des méthodes
+----
+Optionnal<>
+
+matcher() empty {
+    if (present) match;
+    no-match;
+----
+
+==== déstructuration
+
+----
+Point p
+let Point(int x, int y) = p;
+----
+
+== Valala / Liliput
+
+Optimisation Java, LW5
+amélioration VM
+
+ville/population -> calcul population
+
+
+
+=== Value Class
+
+les instances n'ont pas d'adresse en mémoire
+je veux des instances d'objets, mais à l'exécution, il n'y a pas d'adresses en mémoire
+ressemble aux struct en C (se balader avec l'aggrégat des valeurs, mais sans les adresses)
+On veut que les valeurs soient des références (optimisation) mais en conservant l'héritage de java.lang.Object et les interfaces
+
+----
+public value classe Population {
+    final int population
+----
+scalarisation : sur la pile, la JVM remplace l'instance par ses propres valeurs
+
+image::values_types1.jpg[]
+
+sur la pile
+Population pop = new Population(23)
+équilavalent à int pop = 23
+
+les values class sont non modifiables
+tous les attributs sont déclarés final
+
+par contre, dans le constructeur les champs sont modifiables
+=> à la génération, les champs sont changés
+recréation d'un nouvel objet à chaque fois que l'on fait des modifs dessus
+d'un point de vue de la machine virtuelle, les objets sont donc non modifiables
+
+ne pas utiliser les == dans les equals
+ne pas les utiliser dans les values class
+utiliser le pattern matching à la place
+
+return o instance of Popuplation other
+
+gestion des nulls
+syntaxe proposée : Population!
+non null default value class
+si on créé une value class, la valeur par défaut ne sera pas nulle, mais tous les champs seront à 0 => casse l'encapsulation
+Solution : rajouter un constructeur default empty, en plus du constructeur classique
+----
+value class Population { 
+    int valeur;
+defaut Population();
+Population(int value) { 
+this.valeur = value;
+}
+
+value record City(String name, Population! pop { 
+
+}
+----
+améliore la performance
+permets d'aller plus vite sur les tableaux en utilisant les value class, defaut instance, non null
+
+image::values_types2.jpg[]
+
+----
+non-atomic value record Population(int amount)
+----
+
+rend les values types non atomiques
+
+image::values_types3.jpg[]
+
+values class : arrêter les == et les synchronized
+pour faire du flattening de petites classes, il faut bien le defaut instance
+
+le mot-clé non-atomic permet de faire plusieurs read et write car je fais ma concurrence proprement
+
+Mais reste la probléma
+
+== Java dans le cloud
+
+déploie une image statique du jar
+
+== foreign functions API
+
+lien avec le C
