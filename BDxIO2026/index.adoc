@@ -1,0 +1,95 @@
+= BDX IO 2026
+:imagesdir: ./images
+
+== A l’abordage du score Lighthouse
+SeO
+Navigation agentique
+Performance
+Accessibilité
+Bonnes pratiques
+24% d'abandon en moins sur les pages respectant les codes de performance de Google
+
+CLS cumulative layout shift : 25%
+Instabilité du contenu pendant le chargement
+Réserver l'espace
+
+Fcp first contenful paint : 10%
+Chemin de rendu critique :
+Charger moins de CSs (minifier)
+Chargermoins de javascript
+
+Lcp largest contentful paint : 25%
+Temps de rendu du plus grand élément
+Le lcp varie selon le viewport
+Ex : image hero qui fait 100% hauteur et largeur
+Mais technique de filou
+
+Tbt total blocking time 30%
+Somme des temps de blocage au delà de 50ms
+Sobriété du design
+Ex le mansonry calcule trop
+Grid template row mansonry en expérimental
+
+SI speed index 10%
+Memes images, formats différents webbp conversion sans pertes
+Tag html picture
+Différentes versions de l'image avec source
+
+== Server side Events : quand l’API murmure à l’oreille de votre navigateur
+Le mode polling
+On veut que le serveur publie les changements
+Server-sent events SSE
+Api javascript eventsource
+Websocket : flux bi-drirectionel
+Event driven design
+Queue  versus topic : la diff est que les topics ont des abonnés
+Consumer pour les queue et subscriber pour les topics. Les subscribers récup une copie de l'ensemble des messages
+Filtrer les types d'event
+L'idée c'est de recevoir les mises à jour via API
+Si possuble utiliser un driver reactif sur la base de donnees
+Ou utuliser un backend pour frontend pour le sse
+Penser a fermer les sseEmitter
+Utiliser des addEventListener
+Penser en topic, pas en queue
+Gérer la fin de session si pb de scalabilité
+En topic, on peut perdre des messages
+Sur IA, utiluser les diagrammes comme entrant
+
+
+image::SSE (1).jpg[]
+image::SSE (2).jpg[]
+image::SSE (3).jpg[]
+image::SSE (4).jpg[]
+
+
+== Du Prompt artisanal au prompt observable : REX d’une healthtech
+Llm as Judge ?
+Stocker les prompts, les versionner
+Créer des JDD, des observateurs
+
+image::prompts_optimises (1).jpg[]
+
+== Des prompts qui s'optimisent (presque) tout seuls construire un LLM as a judge aligné sur l’annotation humaine
+
+LlM as Judge. Plusieurs Llm qui vérifient
+
+
+== Le temps, c’est de l’argent… et des bugs
+Le tps est non déterministe
+Non continuité du temps
+Non constance
+
+image::dates (1).jpg[]
+image::dates (2).jpg[]
+image::dates (3).jpg[]
+image::dates (4).jpg[]
+
+
+
+== Mon IA galopait, je l’ai harnachée
+
+
+image::harnais (1).jpg[]
+image::harnais (2).jpg[]
+image::harnais (3).jpg[]
+image::harnais (4).jpg[]
